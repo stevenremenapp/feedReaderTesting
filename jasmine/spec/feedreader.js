@@ -127,19 +127,21 @@ $(function() {
             //Changing id of feed changes the feed loaded
             loadFeed(0, function() {
                 //Try for first child href of feed?
-                firstFeed = document.getElementsByClassName('.class')[0].innerHTML;
+                firstFeed = document.querySelector('.entry-link');
                 console.log(firstFeed);
-                done();
-            });
-            loadFeed(3, function() {
-                secondFeed = feed.entries[0].title;
-                console.log(secondFeed);
-                done();
-            })
+                // done();
+                loadFeed(3, function() {
+                    secondFeed = document.querySelector('.entry-link');
+                    console.log(secondFeed);
+                    // secondFeed = feed.entries[0].title;
+                    // console.log(secondFeed);
+                    done();
+                });
+            });            
         });
 
         it('should change content upon reloading feed', function(done) {
-            
+            expect(firstFeed).not.toMatch(secondFeed);
             done();
         });
     }); 
