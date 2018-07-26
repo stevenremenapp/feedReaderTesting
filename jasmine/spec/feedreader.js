@@ -33,7 +33,7 @@ $(function() {
          */
         it('each feed URL within allFeeds should be defined', function() {
             allFeeds.forEach(function(feed) {
-                console.log(feed);
+                // console.log(feed);
                 expect(feed.url).toBeDefined();
                 expect(feed.url.length).not.toBe(0);
             })
@@ -87,6 +87,8 @@ $(function() {
 
     /* TODO: Write a new test suite named "Initial Entries" */
 
+    describe('Initial Entries', function() {
+
         /* TODO: Write a test that ensures when the loadFeed
          * function is called and completes its work, there is at least
          * a single .entry element within the .feed container.
@@ -94,10 +96,51 @@ $(function() {
          * the use of Jasmine's beforeEach and asynchronous done() function.
          */
 
+         beforeEach(function(done) {
+            loadFeed(0, function() {
+                done();
+            });
+         });
+
+         it('should load at least one entry', function(done) {
+            let initialEntry = document.querySelectorAll('.entry');
+            expect(initialEntry.length).not.toBe(0);
+            done();
+         });
+
+    });
+
+        
+
     /* TODO: Write a new test suite named "New Feed Selection" */
 
-        /* TODO: Write a test that ensures when a new feed is loaded
-         * by the loadFeed function that the content actually changes.
-         * Remember, loadFeed() is asynchronous.
-         */
+    describe('New Feed Selection', function() {
+        let firstFeed,
+            secondFeed;
+
+    //     /* TODO: Write a test that ensures when a new feed is loaded
+    //      * by the loadFeed function that the content actually changes.
+    //      * Remember, loadFeed() is asynchronous.
+    //      */
+
+        beforeEach(function(done) {
+            //Changing id of feed changes the feed loaded
+            loadFeed(0, function() {
+                //Try for first child href of feed?
+                firstFeed = document.getElementsByClassName('.class')[0].innerHTML;
+                console.log(firstFeed);
+                done();
+            });
+            loadFeed(3, function() {
+                secondFeed = feed.entries[0].title;
+                console.log(secondFeed);
+                done();
+            })
+        });
+
+        it('should change content upon reloading feed', function(done) {
+            
+            done();
+        });
+    }); 
 }());
