@@ -31,7 +31,7 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
-        it('each feed URL within AllFeeds should be defined', function() {
+        it('each feed URL within allFeeds should be defined', function() {
             allFeeds.forEach(function(feed) {
                 console.log(feed);
                 expect(feed.url).toBeDefined();
@@ -44,6 +44,12 @@ $(function() {
          * in the allFeeds object and ensures it has a name defined
          * and that the name is not empty.
          */
+        it('each feed name within allFeeds should be defined', function() {
+            allFeeds.forEach(function(feed) {
+                expect(feed.name).toBeDefined();
+                expect(feed.name.length).not.toBe(0);
+            })
+        });
     });
 
 
