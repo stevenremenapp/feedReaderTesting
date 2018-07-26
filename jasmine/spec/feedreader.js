@@ -21,7 +21,7 @@ $(function() {
          * allFeeds in app.js to be an empty array and refresh the
          * page?
          */
-        it('are defined', function() {
+        it('allFeeds should be defined', function() {
             expect(allFeeds).toBeDefined();
             expect(allFeeds.length).not.toBe(0);
         });
@@ -31,6 +31,13 @@ $(function() {
          * in the allFeeds object and ensures it has a URL defined
          * and that the URL is not empty.
          */
+        it('each feed URL within AllFeeds should be defined', function() {
+            allFeeds.forEach(function(feed) {
+                console.log(feed);
+                expect(feed.url).toBeDefined();
+                expect(feed.url.length).not.toBe(0);
+            })
+        });
 
 
         /* TODO: Write a test that loops through each feed
