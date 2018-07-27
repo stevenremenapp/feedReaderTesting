@@ -36,20 +36,23 @@ $(function() {
         let body;
 
         beforeEach(function() {
-            body = document.getElementsByTagName("BODY");
+            body = document.querySelector('body');
         });
 
         // Test to ensure the menu is hidden by default
         it('should be hidden by default', function() {
-            expect($(body).hasClass('menu-hidden')).toBe(true);
+            expect(body.classList.contains('menu-hidden')).toBe(true);
         });
 
         // Test to ensure that the menu opens and closes when clicked
         it('should change visibility when clicked', function() {
-            $('.menu-icon-link').click();
-            expect($(body).hasClass('menu-hidden')).toBe(false);
-            $('.menu-icon-link').click();
-            expect($(body).hasClass('menu-hidden')).toBe(true);
+            let menu = document.querySelector('.menu-icon-link');
+            // Open menu and test
+            menu.click();
+            expect(body.classList.contains('menu-hidden')).toBe(false);
+            // Close menu and test
+            menu.click();
+            expect(body.classList.contains('menu-hidden')).toBe(true);
         });
     });
 
@@ -59,15 +62,13 @@ $(function() {
 
         // Async!
         beforeEach(function(done) {
-            loadFeed(0, function() {
-                done();
-            });
+            loadFeed(0, done);
         });
 
         it('should load at least one entry', function(done) {
-            let initialEntry = document.querySelectorAll('.entry');
-            console.log(initialEntry);
-            expect(initialEntry.length > 0).toBe(true);
+            let feedEntries = document.querySelector('.feed').children;
+            // console.log(feedEntries);
+            expect(feedEntries.length > 0).toBe(true);
             done();
         });
     });
@@ -81,12 +82,12 @@ $(function() {
         beforeEach(function(done) {
             //Changing id of feed changes the feed that's loaded
             loadFeed(0, function() {
-                // Grab the first result from first loaded feed
-                firstFeed = document.querySelector('.entry-link');
+                // Grab the article titles from first loaded feed
+                firstFeed = document.querySelector('.feed').innerText;
                 // console.log(firstFeed);
                 loadFeed(3, function() {
-                    // Grab the first result from last loaded feed
-                    secondFeed = document.querySelector('.entry-link');
+                    // Grab the article titles from last loaded feed
+                    secondFeed = document.querySelector('.feed').innerText;
                     // console.log(secondFeed);
                     done();
                 });
