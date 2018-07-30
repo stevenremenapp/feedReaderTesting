@@ -66,9 +66,9 @@ $(function() {
         });
 
         it('should load at least one entry', function(done) {
-            let feedEntries = document.querySelector('.feed').children;
+            let feedEntries = document.querySelector('.feed').querySelectorAll('.entry');
             // console.log(feedEntries);
-            expect(feedEntries.length > 0).toBe(true);
+            expect(feedEntries.length).toBeGreaterThan(0);
             done();
         });
     });
